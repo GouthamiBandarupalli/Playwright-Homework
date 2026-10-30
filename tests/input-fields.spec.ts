@@ -22,9 +22,10 @@ test('Locate the cat input', async ({ page }) => {
   await page.getByText('Pet Types', { exact: true }).click();
   const cat = page.locator('[id="0"] ');
   await expect(cat).toBeVisible();
-  //await cat.getByRole('button',{name:'Edit'}).first().click();
+ 
+  
   });
-
+  
   test('Edit cat pet type', async ({ page }) => {
     await page.getByText('Pet Types', { exact: true }).click();
     const cat = page.locator('[id="0"] ');
@@ -49,12 +50,21 @@ test('Locate the cat input', async ({ page }) => {
     await page.getByRole('button',{name:'Edit'}).first().click();
     const petTypeInput=page.getByRole('textbox');
     await expect(petTypeInput).toBeVisible();
-    await petTypeInput.fill('Rabbit');
+    await petTypeInput.clear();
+    await petTypeInput.fill('rabbit');
     //click on update
     await page.getByRole('button',{name:'Update'});
     const updatebutton=page.getByRole('button',{name:'Update'});
     await expect(updatebutton).toBeVisible();
     await updatebutton.click();
     await page.waitForTimeout(1000);
+    await expect(cat).toHaveValue('rabbit');
+    await page.getByRole('button',{name:'Edit'}).first().click();
+    const petTypeInput1=page.getByRole('textbox');
+    await expect(petTypeInput1).toBeVisible();
+    await petTypeInput1.clear();
+    await petTypeInput1.fill('cat');
+    await page.getByRole('button',{name:'Update'}).click();
+    await petTypeInput1.fill('cat');
   });
         
