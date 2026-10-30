@@ -4,10 +4,11 @@ test.beforeEach( async({page}) => {
   await page.goto('/')
 })
 
+//Open Home Page
 test('Home page is opened and Welcome message is displayed', async ({page}) => {
   await expect(page.locator('.title')).toHaveText('Welcome to Petclinic')
 });
-  
+  //Click on Pet Types
 test('Click on Pet Types', async ({page}) => {
   await page.getByText('Pet Types', { exact: true }).click();
   // check heading
@@ -18,14 +19,14 @@ test('Wait for a second', async ({page}) => {
   await page.waitForTimeout(1000);
 });
 
+//Locate cat input field
 test('Locate the cat input', async ({ page }) => {
   await page.getByText('Pet Types', { exact: true }).click();
   const cat = page.locator('[id="0"] ');
   await expect(cat).toBeVisible();
- 
   
   });
-  
+  //Edit cat type
   test('Edit cat pet type', async ({ page }) => {
     await page.getByText('Pet Types', { exact: true }).click();
     const cat = page.locator('[id="0"] ');
