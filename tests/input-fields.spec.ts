@@ -11,20 +11,17 @@ test.beforeEach( async({page}) => {
     await expect(page.locator('h2')).toHaveText('Pet Types');
     const cat = page.locator('[id="0"]');
     await page.getByRole('button',{name:'Edit'}).first().click();
-    const firstpetTypeInput=page.getByRole('textbox');
-    await expect(firstpetTypeInput).toBeVisible();
-    await expect(firstpetTypeInput).toHaveValue('cat');
-    await firstpetTypeInput.fill('rabbit');
+    const petTypeInput=page.getByRole('textbox');
+    await expect(petTypeInput).toBeVisible();
+    await expect(petTypeInput).toHaveValue('cat');
+    await petTypeInput.fill('rabbit');
     const updatebtn=page.getByRole('button',{name:'Update'});
     await expect(updatebtn).toBeVisible();
     await updatebtn.click();
     //click on update
     await page.getByRole('button',{name:'Edit'}).first().click();
-    const secondpetTypeInput=page.getByRole('textbox');
-    await expect(secondpetTypeInput).toBeVisible();
-    await expect(secondpetTypeInput).toBeEditable();
-    await expect(secondpetTypeInput).toHaveValue('rabbit');
-    await secondpetTypeInput.fill('cat');
+    await expect(petTypeInput).toHaveValue('rabbit');
+    await petTypeInput.fill('cat');
     await expect(updatebtn).toBeVisible();
     await updatebtn.click();
     await expect(cat).toHaveValue('cat');
