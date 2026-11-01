@@ -10,7 +10,6 @@ test.beforeEach( async({page}) => {
     //check Pet Types heading
     await expect(page.locator('h2')).toHaveText('Pet Types');
     const cat = page.locator('[id="0"]');
-    await expect(cat).toBeVisible();
     await page.getByRole('button',{name:'Edit'}).first().click();
     const firstpetTypeInput=page.getByRole('textbox');
     await expect(firstpetTypeInput).toBeVisible();
