@@ -14,22 +14,17 @@ test.beforeEach( async({page}) => {
     await page.getByRole('row',{name:'cat'}).getByRole('button',{name:'Edit'}).click();
     //Add assertion of the "Edit Pet Type" text displayed
     await expect(page.locator('h2')).toHaveText('Edit Pet Type');    
-    const petTypeInput=page.getByRole('textbox');
-    await expect(petTypeInput).toBeVisible();
     //Change the pet type name from "cat" to "rabbit" and click "Update" button
-    await expect(petTypeInput).toHaveValue('cat');
-    await petTypeInput.fill('rabbit');
-    const updatebtn=page.getByRole('button',{name:'Update'});
-    await expect(updatebtn).toBeVisible();
-    await updatebtn.click();
+    await expect(page.getByRole('textbox')).toHaveValue('cat');
+    await page.getByRole('textbox').fill('rabbit');
+    await page.getByRole('button',{name:'Update'}).click();
     //Click on "Edit" button for the same "rabbit" pet type
     await page.getByRole('row',{name:'rabbit'}).getByRole('button',{name:'Edit'}).click();
     //Add the assertion that the first pet type in the list of types has a value "rabbit" 
-    await expect(petTypeInput).toHaveValue('rabbit');
+    await expect(page.getByRole('textbox')).toHaveValue('rabbit');
     //Change the pet type name back from "rabbit" to "cat" and click "Update" button
-    await petTypeInput.fill('cat');
-    await expect(updatebtn).toBeVisible();
-    await updatebtn.click();
+    await page.getByRole('textbox').fill('cat');
+    await page.getByRole('button',{name:'Update'}).click();
     //Add assertion that the first pet type in the list of names has a value "cat"
     await expect(page.locator('[id="0"]')).toHaveValue('cat');
     });
