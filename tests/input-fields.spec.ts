@@ -3,7 +3,6 @@ import { test, expect } from '@playwright/test';
 test.beforeEach( async({page}) => {
   await page.goto('/')
  })
-  
   //Edit cat type
   test('Edit cat pet type', async ({ page }) => {
     //Select the PET TYPES menu item in the navigation bar
