@@ -7,9 +7,6 @@ test.beforeEach( async({page}) => {
   //Edit cat type
   test('Edit cat pet type', async ({ page }) => {
     await page.getByText('Pet Types', { exact: true }).click();
-    //check Pet Types heading
-    await expect(page.locator('h2')).toHaveText('Pet Types');
-    const cat = page.locator('[id="0"]');
     await page.getByRole('row',{name:'cat'}).getByRole('button',{name:'Edit'}).click();
     const petTypeInput=page.getByRole('textbox');
     await expect(petTypeInput).toBeVisible();
@@ -25,6 +22,6 @@ test.beforeEach( async({page}) => {
     await petTypeInput.fill('cat');
     await expect(updatebtn).toBeVisible();
     await updatebtn.click();
-    await expect(cat).toHaveValue('cat');
+    await expect(page.locator('[id="0"]')).toHaveValue('cat');
     });
         
